@@ -20,13 +20,13 @@ const MasterDataRepository = {
         return await db.query('DELETE FROM category_mandatory WHERE id = ?', [id]);
     },
     deleteRelatedFile: async(name)=>{
-        
+        return await db.query('DElETE from customer_file WHERE name = ?', [name]);
     },
     updateMandatory: async(id, name)=>{
         return await db.query('UPDATE category_mandatory SET name = ? WHERE id = ?', [name, id]);
     },
-    updateRelatedFile: async(name)=>{
-
+    updateRelatedFile: async(currentName, updatedName)=>{
+        return await db.query('UPDATE customer_file SET name = ? WHERE name = ?', [updatedName, currentName]);
     },
 
 

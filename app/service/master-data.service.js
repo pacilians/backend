@@ -26,9 +26,15 @@ const MasterDataService = {
     return await masterDataRepository.createMandatory(name);
   },
   async updateMandatory(id, name){
+    const list = await masterDataRepository.getAllMandatory()
+    const current = list.filter((ctx)=> ctx.id == id)[0]
+    await masterDataRepository.updateRelatedFile(current.name, name)
     return await masterDataRepository.updateMandatory(id, name);
   },
   async deleteMandatory(id) {
+    const list = await masterDataRepository.getAllMandatory()
+    const current = list.filter((ctx)=> ctx.id == id)[0]
+    await masterDataRepository.deleteRelatedFile(current.name)
     return await masterDataRepository.deleteMandatory(id);
   },
 
