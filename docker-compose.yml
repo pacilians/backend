@@ -1,13 +1,9 @@
-version: '3.9'
+version: '3'
 services:
   app:
-    build: .
-    networks:
-      mynetwork: {}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: 'host'
     env_file:
       - .env
-
-networks:
-  mynetwork:
-    external: true
-    name: host
