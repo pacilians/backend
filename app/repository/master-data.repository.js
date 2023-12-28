@@ -44,7 +44,8 @@ const MasterDataRepository = {
         return result.insertId;
     },
     deleteService: async(id)=>{
-        return await db.query('DELETE FROM category_mandatory WHERE id = ?', [id]);
+        console.log(id);
+        return await db.query('DELETE FROM category_service WHERE id = ?', [id]);
     },
 
 
