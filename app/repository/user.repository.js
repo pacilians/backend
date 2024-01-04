@@ -6,11 +6,10 @@ const CryptoJS = require('crypto-js');
 const UserRepository = {
   async createUser(user) {
     const id = uuidv4();
-    const { email, name, npp, role, description } = user;
+    const { email, name, npp, role, description, password} = user;
 
     const combinedString = email +" "+ name;
     const secretPassphrase = role;
-    const password = CryptoJS.AES.encrypt(combinedString, secretPassphrase).toString();
 
     const created = await db.query(
       "INSERT INTO user (id, email, password, name, npp, role, description) VALUES (?, ?, ?, ?, ?, ?, ?);",
