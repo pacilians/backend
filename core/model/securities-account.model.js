@@ -4,8 +4,7 @@ class SecuritiesAccount {
         id_customer,
         kode_bk,
         no_rekening_investor,
-        nama_perusahaan,
-        nama_awal,
+        nama,
         nama_tengah,
         nama_belakang,
         ktp,
@@ -16,6 +15,7 @@ class SecuritiesAccount {
         tempat_pendirian,
         tipe_investor,
         jenis_kelamin,
+        domisili,
         jenis_pekerjaan,
         alamat_identitas_1,
         alamat_identitas_2,
@@ -30,8 +30,7 @@ class SecuritiesAccount {
         this.id_customer = id_customer;
         this.kode_bk = kode_bk;
         this.no_rekening_investor = no_rekening_investor;
-        this.nama_perusahaan = nama_perusahaan;
-        this.nama_awal = nama_awal;
+        this.nama = nama
         this.nama_tengah = nama_tengah;
         this.nama_belakang = nama_belakang;
         this.ktp = ktp;
@@ -49,6 +48,7 @@ class SecuritiesAccount {
         this.kode_provinsi = kode_provinsi;
         this.kode_negara = kode_negara;
         this.no_telepon = no_telepon;
+        this.domisili = this.domisili
         this.no_hp = no_hp;
         this.email = email;
         this.created_at = null
@@ -61,7 +61,7 @@ class SecuritiesAccount {
         this.kode_bk = data.kode_bk;
         this.no_rekening_investor = data.no_rekening_investor;
         this.nama_perusahaan = data.nama_perusahaan;
-        this.nama_awal = data.nama_awal;
+        this.nama = data.nama;
         this.nama_tengah = data.nama_tengah;
         this.nama_belakang = data.nama_belakang;
         this.ktp = data.ktp;
@@ -83,10 +83,6 @@ class SecuritiesAccount {
         this.email = data.email;
         this.created_at = data.created_at || null
         this.updated_at = data.updated_at || null
-    }
-
-    addAudit(audit) {
-        this.audit.push(audit);
     }
 }
 

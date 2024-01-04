@@ -2,16 +2,15 @@ const db = require("../../core/database");
 
 module.exports = {
   createSecuritiesAccount: async (securitiesAccount) => {
-    const now = new Date()
-    console.log(securitiesAccount)
+    const now = new Date();
+    console.log(securitiesAccount);
     const [result] = await db.query(
-      "INSERT INTO securities_account (id_customer, kode_bk, no_rekening_investor, nama_perusahaan, nama_awal, nama_tengah, nama_belakang, ktp, npwp, no_paspor, no_pendaftaran_usaha, tanggal_pendirian, tempat_pendirian, tipe_investor, jenis_kelamin, jenis_pekerjaan, alamat_identitas_1, alamat_identitas_2, kode_kota, kode_provinsi, kode_negara, no_telepon, no_hp, email, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO securities_account (id_customer, kode_bk, no_rekening_investor, nama, nama_tengah, nama_belakang, ktp, npwp, no_paspor, no_pendaftaran_usaha, tanggal_pendirian, tempat_pendirian, tipe_investor, jenis_kelamin, jenis_pekerjaan, alamat_identitas_1, alamat_identitas_2, kode_kota, kode_provinsi, kode_negara, no_telepon, no_hp, email, domisili, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         securitiesAccount.id_customer,
         securitiesAccount.kode_bk,
         securitiesAccount.no_rekening_investor,
-        securitiesAccount.nama_perusahaan,
-        securitiesAccount.nama_awal,
+        securitiesAccount.nama,
         securitiesAccount.nama_tengah,
         securitiesAccount.nama_belakang,
         securitiesAccount.ktp,
@@ -31,7 +30,8 @@ module.exports = {
         securitiesAccount.no_telepon,
         securitiesAccount.no_hp,
         securitiesAccount.email,
-        now
+        securitiesAccount.domisili,
+        now,
       ]
     );
 
@@ -58,19 +58,19 @@ module.exports = {
     const { ...rest } = securitiesAccount;
     const keys = Object.keys(rest);
     const values = keys.map((key) => rest[key]);
-    let valuesIn = []
-    let updateFields = []
+    let valuesIn = [];
+    let updateFields = [];
 
-    keys.forEach((key)=>{
-      if(rest[key]){
-        updateFields.push(`${key} = ?`)
-        valuesIn.push(rest[key])
-      }else{
+    keys.forEach((key) => {
+      if (rest[key]) {
+        updateFields.push(`${key} = ?`);
+        valuesIn.push(rest[key]);
+      } else {
         // Continue
       }
-    })
+    });
     updateFields = updateFields.join(", ");
-    valuesIn.push(id)
+    valuesIn.push(id);
     const [result] = await db.query(
       `UPDATE securities_account SET ${updateFields} WHERE id = ?`,
       valuesIn

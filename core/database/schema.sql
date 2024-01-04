@@ -9,9 +9,7 @@ CREATE TABLE `user` (
   `photo` longblob DEFAULT null,
   `npp` varchar(255),
   `role` varchar(255),
-  `description` varchar(255),
-  `is_notify` int DEFAULT 0,
-  `id_customer` varchar(255) DEFAULT ""
+  `description` varchar(255)
 );
 
 CREATE TABLE `customer` (
@@ -28,9 +26,7 @@ CREATE TABLE `customer` (
   `key_person_dob` datetime,
   `key_person_hp` varchar(255),
   `created_at` timestamp,
-  `updated_at` timestamp DEFAULT null,
-  `status` int DEFAULT 0,
-  `comment` varchar(255) DEFAULT ""
+  `updated_at` timestamp DEFAULT null
 );
 
 CREATE TABLE `board_of_director` (
@@ -52,18 +48,21 @@ CREATE TABLE `bank_account` (
 );
 
 CREATE TABLE `category_mandatory` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255)
+  `id` int AUTO_INCREMENT,
+  `name` varchar(255) UNIQUE,
+  PRIMARY KEY (`id`, `name`)
 );
 
 CREATE TABLE `category_service` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255)
+  `id` int AUTO_INCREMENT,
+  `name` varchar(255) UNIQUE,
+  PRIMARY KEY (`id`, `name`)
 );
 
 CREATE TABLE `category_business` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255)
+  `id` int AUTO_INCREMENT,
+  `name` varchar(255) UNIQUE,
+  PRIMARY KEY (`id`, `name`)
 );
 
 CREATE TABLE `log` (
@@ -106,31 +105,12 @@ CREATE TABLE `announcement` (
   `updated_at` timestamp DEFAULT null
 );
 
-CREATE TABLE `audit_event` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255),
-  `created_at` datetime,
-  `start` datetime,
-  `end` datetime
-);
-
-CREATE TABLE `audit` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `id_audit_event` int,
-  `name` varchar(255),
-  `created_at` datetime,
-  `updated_at` datetime DEFAULT null,
-  `status` varchar(255),
-  `file` longblob DEFAULT null
-);
-
 CREATE TABLE `securities_account` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `id_customer` varchar(255),
   `kode_bk` varchar(255),
   `no_rekening_investor` varchar(255),
-  `nama_perusahaan` varchar(255),
-  `nama_awal` varchar(255),
+  `nama` varchar(255),
   `nama_tengah` varchar(255),
   `nama_belakang` varchar(255),
   `ktp` varchar(255),
@@ -139,6 +119,7 @@ CREATE TABLE `securities_account` (
   `no_pendaftaran_usaha` varchar(255),
   `tanggal_pendirian` datetime,
   `tempat_pendirian` varchar(255),
+  `domisili` varchar(255),
   `tipe_investor` varchar(255),
   `jenis_kelamin` varchar(255),
   `jenis_pekerjaan` varchar(255),
